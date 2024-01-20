@@ -36,5 +36,6 @@ public class FallingAsleep extends Phenomena{
     @Override
     public void begin(Place place, Person person){
         waitInTime(person);
+        person.setStatusSleeping(Person.StatusSleeping.sleeping);
     }
 }

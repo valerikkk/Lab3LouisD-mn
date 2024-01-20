@@ -1,5 +1,6 @@
 package Humans;
 import Enums.NoiseLevel;
+import Exceptions.ShirtStatusException;
 import Interface.MoveInterface;
 import Place.Place;
 import Things.*;
@@ -157,6 +158,15 @@ public class Person implements MoveInterface {
     public static void setCallCounter(int callCounter) {
         Person.callCounter = callCounter;
     }
+
+    public StatusSleeping getStatusSleeping() {
+        return statusSleeping;
+    }
+
+    public void setStatusSleeping(StatusSleeping statusSleeping) {
+        this.statusSleeping = statusSleeping;
+    }
+
     @Override
     public void goTo(Place place) {
             setLocation(place);
@@ -166,13 +176,21 @@ public class Person implements MoveInterface {
     }
     @Override
     public void go(Place place){
-        if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ()){
-            System.out.printf("%s onTheEdgeOfTheLocation", getName());
-        }
-        else{
-            while(getX() != place.getMaxX()){
-                setX(getX()+getSpeed());
+        try{
+            if(getLocation()==place&&(getX()>place.getMaxX() | getX()<place.getMinX() | getZ()>place.getMaxZ() | getZ()< place.getMinZ())){
+                throw new ShirtStatusException("Louis");
             }
+            if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ()){
+                System.out.printf("%s onTheEdgeOfTheLocation", getName());
+            }
+            else{
+                while(getX() != place.getMaxX()){
+                    setX(getX()+getSpeed());
+                }
+            }
+        }
+        catch(ShirtStatusException exception){
+            System.out.printf("%n%s outside of %s", getName(), place.getPlace());
         }
     }
     @Override
@@ -206,12 +224,12 @@ public class Person implements MoveInterface {
     }
     public void sleep(){
         shirt.setShirtStatus(Shirt.ShirtStatus.takedOff);
-        statusSleeping = StatusSleeping.sleeping;
+        setStatusSleeping(StatusSleeping.sleeping);
         conscience.getTriggers().removeAll(conscience.getTriggers());
         System.out.println("Zzz");
     }
     public void beWake(){
-        statusSleeping = StatusSleeping.cantFallAsleep;
+        setStatusSleeping(StatusSleeping.cantFallAsleep);
         condition.removeAll(getCondition());
         addCondition(Condition.nervous.getCondition());
         think();
@@ -221,7 +239,7 @@ public class Person implements MoveInterface {
     }
     @Override
     public void standUp(){
-        statusSleeping = StatusSleeping.wakeUp;
+        setStatusSleeping(StatusSleeping.wakeUp);
         conscience.addTrigger("I wake, i am alive");
     }
     public void say(String message){
