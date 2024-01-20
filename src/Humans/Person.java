@@ -178,7 +178,7 @@ public class Person implements MoveInterface {
     public void go(Place place){
         try{
             if(getLocation()==place&&(getX()>place.getMaxX() | getX()<place.getMinX() | getZ()>place.getMaxZ() | getZ()< place.getMinZ())){
-                throw new ShirtStatusException("Louis stacked in textures");
+                throw new ShirtStatusException("Louis stacked in textures.");
             }
             if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ()){
                 System.out.printf("%s onTheEdgeOfTheLocation", getName());
