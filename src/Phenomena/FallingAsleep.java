@@ -13,7 +13,7 @@ public class FallingAsleep extends Phenomena{
     public void waitInTime(Person person){
         try{
             TimeUnit.SECONDS.sleep(2);
-            System.out.printf("1 minute past. %s lay%n", person.getName());
+            System.out.printf("%n1 minute past. %s lay%n", person.getName());
             TimeUnit.SECONDS.sleep(1);
             System.out.printf("2 minutes past.%n");
             TimeUnit.SECONDS.sleep(2);

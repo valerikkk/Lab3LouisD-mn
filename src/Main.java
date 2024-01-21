@@ -13,16 +13,16 @@ public class Main {
         //Создание объектов местностей
         Forest forest = new Forest();
         Forest.Lawn lawn = forest.new Lawn();
-        Forest.Pit pit = forest.new Pit();
-        Forest.Pathway pathToThicket = forest.new Pathway(forest.getX(), forest.getY(), forest.getZ(), forest.getMaxX()-40);
+        Forest.Pit pit = new Forest.Pit();
+        Forest.Pathway pathToThicket = new Forest.Pathway(forest.getX(), forest.getY(), forest.getZ(), forest.getMaxX()-40);
         House house = new House();
-        Forest.Pathway pathToHouse = forest.new Pathway(forest.getX(), 0, forest.getZ(), house.getMaxX()- forest.getX());
+        Forest.Pathway pathToHouse = new Forest.Pathway(forest.getX(), 0, forest.getZ(), house.getMaxX()- forest.getX());
         House.Bedroom bedroom = house.new Bedroom();
         //Создание объектов персон
         Person louis = new Person("Louis", lawn, pit.getMaxX(), lawn.getY(), pit.getMaxZ());
         Person rachel = new Person("Rachel", house, house.getX()+4, house.getY(), house.getZ()+3);
         //Создание объектов вспомогательных предметов
-        Tree tree = new Tree("beryozzzza");
+        Tree tree = new Tree("beryozzzza", PlacesName.forest);
         Bark bark = new Bark();
         Tombstones tombstone = new Tombstones("tombstones");
         //Создание объектов явлений

@@ -1,5 +1,6 @@
 package Humans;
 import Enums.NoiseLevel;
+import Exceptions.LouisStackInTextureException;
 import Exceptions.ShirtStatusException;
 import Interface.MoveInterface;
 import Place.Place;
@@ -125,8 +126,10 @@ public class Person implements MoveInterface {
     }
     public void lookAround(Place place, Conscience conscience){
         if(getCallCounter()== 0) {
-            if (getLocation() == place) {
+            if (getLocation() == place){
+                conscience.addTrigger("I see in pit:");
                 conscience.addTrigger(place.getContent());
+                conscience.addTrigger(",Pathway to the thicket...");
                 think();
                 setCallCounter(getCallCounter()+1);
             }
@@ -178,7 +181,7 @@ public class Person implements MoveInterface {
     public void go(Place place){
         try{
             if(getLocation()==place&&(getX()>place.getMaxX() | getX()<place.getMinX() | getZ()>place.getMaxZ() | getZ()< place.getMinZ())){
-                throw new ShirtStatusException("Louis stacked in textures.");
+                throw new LouisStackInTextureException("Louis stacked in textures.");
             }
             if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ()){
                 System.out.printf("%s onTheEdgeOfTheLocation", getName());
@@ -189,7 +192,7 @@ public class Person implements MoveInterface {
                 }
             }
         }
-        catch(ShirtStatusException exception){
+        catch(LouisStackInTextureException exception){
             System.out.printf("%n%s outside of %s", getName(), place.getPlace());
         }
     }

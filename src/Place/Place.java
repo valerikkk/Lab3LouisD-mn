@@ -1,6 +1,7 @@
 package Place;
 
 import Enums.NoiseLevel;
+import Interface.Locatable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public abstract class Place {
     private static int humidityCoefficient = 0;
     private static int lightCoefficient;
     private static double visibilityCoefficient = 1;
-    private final List<Object> content = new ArrayList<>();
+    private final List<Locatable> content = new ArrayList<>();
     public Place(PlacesName place, int x, int y, int z, int radius){
         this.place = place;
         this.x = x;
@@ -33,13 +34,13 @@ public abstract class Place {
     public NoiseLevel getNoiseLevel() {
         return noiseLevel;
     }
-    public void addContent(Object object){
+    public void addContent(Locatable object){
         content.add(object);
     }
-    public void removeContent(Object object){
+    public void removeContent(Locatable object){
         content.remove(object);
     }
-    public List<Object> getContent(){
+    public List<Locatable> getContent(){
         return content;
     }
     public int getZ() {
