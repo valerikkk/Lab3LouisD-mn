@@ -127,9 +127,9 @@ public class Person implements MoveInterface {
     public void lookAround(Place place, Conscience conscience){
         if(getCallCounter()== 0) {
             if (getLocation() == place){
-                conscience.addTrigger("I see in pit:");
+                conscience.addTrigger("I see in lawn:");
                 conscience.addTrigger(place.getContent());
-                conscience.addTrigger(",Pathway to the thicket...");
+                conscience.addTrigger("Pathway to the thicket...");
                 think();
                 setCallCounter(getCallCounter()+1);
             }
@@ -141,6 +141,7 @@ public class Person implements MoveInterface {
         }
         else if(callCounter == 2){
             if(place.getVisibilityCoefficient() <1){
+                conscience.addTrigger("Damn, what a Fog, is it Stonehendge?");
                 conscience.addTrigger("Omg, why i can't see nothing?");
                 conscience.addTrigger("Louis, are you sure, that it's all?");
             }
