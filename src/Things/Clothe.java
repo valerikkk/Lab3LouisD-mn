@@ -1,7 +1,4 @@
 package Things;
-
-import Place.PlacesName;
-
 public class Clothe{
     private final int barCode;
     public Clothe(int barCode){

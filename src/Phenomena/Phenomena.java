@@ -1,7 +1,4 @@
 package Phenomena;
-import Humans.Person;
-import Interface.StartingInterface;
-import Place.Place;
 import Place.PlacesName;
 
 import java.util.Objects;

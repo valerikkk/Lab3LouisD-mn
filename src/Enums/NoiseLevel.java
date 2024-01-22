@@ -1,5 +1,5 @@
 package Enums;
 
 public enum NoiseLevel {
-    average, high, silence;
+    average, high, silence
 }

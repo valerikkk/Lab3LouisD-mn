@@ -4,9 +4,7 @@ import Humans.Person;
 import Interface.Locatable;
 import Interface.StartingInterface;
 import Place.PlacesName;
-
 import Things.Thing;
-import Things.Tombstones;
 import Place.Place;
 public class Fog extends Phenomena implements StartingInterface {
     public Fog() {
@@ -33,14 +31,3 @@ public class Fog extends Phenomena implements StartingInterface {
         }
     }
 }
-//import Humans.Person;
-//import Place.PlacesName;
-//
-//public class Stonehendge extends Thing{
-//    public Stonehendge(){
-//        super("Stonehendge", PlacesName.lawn);
-//    }
-//    public void interactWithPerson(Person person){
-//        person.getConscience().addTrigger("");
-//    }
-//}

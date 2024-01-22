@@ -70,7 +70,7 @@ public class Person implements MoveInterface {
         }
     }
     public enum Condition{
-        scared, withoutIncident, hastily, depressed, nervous;
+        scared, withoutIncident, hastily, depressed, nervous
     }
     public List<Condition> getCondition(){
         return condition;
@@ -231,11 +231,13 @@ public class Person implements MoveInterface {
         sleeping, wakeUp, cantFallAsleep
     }
     public void sleep(){
-        removeClothe(shirt);
-        removeClothe(trousers);
-        setStatusSleeping(StatusSleeping.sleeping);
-        conscience.getTriggers().removeAll(conscience.getTriggers());
-        System.out.println("Zzz");
+        if(getStatusSleeping()!=StatusSleeping.sleeping){
+            removeClothe(shirt);
+            removeClothe(trousers);
+            setStatusSleeping(StatusSleeping.sleeping);
+            conscience.getTriggers().removeAll(conscience.getTriggers());
+            System.out.println("Zzz");
+        }
     }
     public void beWake(){
         setStatusSleeping(StatusSleeping.cantFallAsleep);
@@ -263,12 +265,12 @@ public class Person implements MoveInterface {
     }
     public void toHear(){
         if(getLocation().getNoiseLevel() == NoiseLevel.high){
-            condition.removeAll(getCondition());
+            removeCondition(Condition.depressed);
             addCondition(Condition.hastily);
             addCondition(Condition.scared);
             setSpeed(3);
         }else if (getLocation().getNoiseLevel() == NoiseLevel.silence) {
-            condition.removeAll(getCondition());
+            removeCondition(Condition.hastily);
             addCondition(Condition.depressed);
             setSpeed(1);
         }
