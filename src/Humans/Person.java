@@ -37,8 +37,8 @@ public class Person implements MoveInterface {
         palms = new Palms();
         shirt = new Shirt(228);
         trousers = new Trousers(333);
-        clothes.add(shirt);
-        clothes.add(trousers);
+        addClothe(shirt);
+        addClothe(trousers);
     }
     public class Conscience{
         private final List<Object> triggers = new ArrayList<>();
@@ -143,6 +143,12 @@ public class Person implements MoveInterface {
     public List<Wearable> getClothes() {
         return clothes;
     }
+    public void addClothe(Wearable clothe){
+        clothes.add(clothe);
+    }
+    public void removeClothe(Wearable clothe){
+        clothes.remove(clothe);
+    }
     public Palms getPalms() {
         return palms;
     }
@@ -220,7 +226,7 @@ public class Person implements MoveInterface {
     }
     public void sleep(){
         shirt.setShirtStatus(Shirt.ShirtStatus.takedOff);
-        clothes.remove(shirt);
+        removeClothe(shirt);
         setStatusSleeping(StatusSleeping.sleeping);
         conscience.getTriggers().removeAll(conscience.getTriggers());
         System.out.println("Zzz");
@@ -242,7 +248,7 @@ public class Person implements MoveInterface {
     @Override
     public void standUp(){
         setStatusSleeping(StatusSleeping.wakeUp);
-        clothes.add(shirt);
+        addClothe(shirt);
         conscience.addTrigger("I wake, i am alive");
     }
     public void say(String message){
