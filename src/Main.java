@@ -1,5 +1,3 @@
-
-import Exceptions.LouisStackInTextureException;
 import Humans.Person;
 import Phenomena.Crackling;
 import Phenomena.FallingAsleep;
@@ -22,8 +20,6 @@ public class Main {
         House.Bedroom bedroom = house.new Bedroom();
         Person louis = new Person("Louis", lawn, pit.getMaxX(), lawn.getY(), pit.getMaxZ());
         Person rachel = new Person("Rachel", house, house.getX()+4, house.getY(), house.getZ()+3);
-        Bark bark = new Bark();
-        Tombstones tombstone = new Tombstones("tombstones");
         Crackling crackling = new Crackling();
         FallingAsleep fallingAsleep = new FallingAsleep();
         Fog fog = new Fog();
@@ -41,6 +37,7 @@ public class Main {
         pathToHouse.toLead(PlacesName.house);
         louis.lookAround(lawn, louis.getConscience());
         louis.goTo(house);
+        louis.goTo(bedroom);
         louis.beWake();
         rachel.sleep();
         louis.flipThrough(magazines);
@@ -48,5 +45,6 @@ public class Main {
         rachel.say("Lou? Darling, are you coming?");
         louis.say("Now");
         louis.turnLight(bedroom);
+        fallingAsleep.begin(louis.getLocation(), louis);
     }
 }

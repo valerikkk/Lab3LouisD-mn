@@ -144,10 +144,16 @@ public class Person implements MoveInterface {
         return clothes;
     }
     public void addClothe(Wearable clothe){
-        clothes.add(clothe);
+        if(!getClothes().contains(clothe)){
+            clothes.add(clothe);
+            shirt.setShirtStatus(Shirt.ShirtStatus.refueled);
+            trousers.setTrousersStatus(Trousers.TrousersStatus.takedOff);
+        }
     }
     public void removeClothe(Wearable clothe){
         clothes.remove(clothe);
+        trousers.setTrousersStatus(Trousers.TrousersStatus.takedOff);
+        shirt.setShirtStatus(Shirt.ShirtStatus.takedOff);
     }
     public Palms getPalms() {
         return palms;
@@ -225,8 +231,8 @@ public class Person implements MoveInterface {
         sleeping, wakeUp, cantFallAsleep
     }
     public void sleep(){
-        shirt.setShirtStatus(Shirt.ShirtStatus.takedOff);
         removeClothe(shirt);
+        removeClothe(trousers);
         setStatusSleeping(StatusSleeping.sleeping);
         conscience.getTriggers().removeAll(conscience.getTriggers());
         System.out.println("Zzz");
@@ -249,6 +255,7 @@ public class Person implements MoveInterface {
     public void standUp(){
         setStatusSleeping(StatusSleeping.wakeUp);
         addClothe(shirt);
+        addClothe(trousers);
         conscience.addTrigger("I wake, i am alive");
     }
     public void say(String message){
