@@ -1,13 +1,14 @@
 package Things;
 
+import Interface.Locatable;
 import Place.PlacesName;
 
-public class Bark extends Thing{
+public class Bark extends Thing implements Locatable {
+    public static StateBark stateBark;
     public Bark(){
         super("bark", PlacesName.pit);
         stateBark = StateBark.onTree;
     }
-    public static StateBark stateBark;
     public StateBark getStateBark(){
         return stateBark;
     }

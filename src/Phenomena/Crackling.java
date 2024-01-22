@@ -1,13 +1,15 @@
 package Phenomena;
 import Enums.NoiseLevel;
 import Humans.Person;
+import Interface.StartingInterface;
 import Place.PlacesName;
 import Place.Place;
 
-public class Crackling extends Phenomena{
+public class Crackling extends Phenomena implements StartingInterface {
     public Crackling(){
         super("Crackling", PlacesName.forest);
     }
+    @Override
     public void begin(Place place, Person person){
         if(place.getPlace() == PlacesName.pit | place.getPlace() == PlacesName.lawn){
             System.out.printf("%s's sounds... Cshse... Tschz...", getTitle());
