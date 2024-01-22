@@ -24,12 +24,14 @@ public class Person implements MoveInterface {
     private final Shirt shirt;
     private static int callCounter = 0;
     private StatusSleeping statusSleeping;
+    private final List<Condition> condition;
     public Person(String name, Place location, int x, int y, int z){
         this.name = name;
         this.location = location;
         this.x = x;
         this.y = y;
         this.z = z;
+        this.condition = new ArrayList<>();
         conscience = new Conscience();
         palms = new Palms();
         shirt = new Shirt(228);
@@ -70,23 +72,15 @@ public class Person implements MoveInterface {
         }
     }
     public enum Condition{
-        scared("scared"), withoutIncident("without incident"), hastily("hastily"), depressed("depressed"), nervous("nervous");
-        public final String condition;
-        Condition(String condition){
-            this.condition = condition;
-        }
-        public String getCondition(){
-            return condition;
-        }
+        scared, withoutIncident, hastily, depressed, nervous;
     }
-    private final List<String> condition = new ArrayList<>();
-    public List<String> getCondition(){
+    public List<Condition> getCondition(){
         return condition;
     }
-    public void addCondition(String condition){
+    public void addCondition(Condition condition){
         this.condition.add(condition);
     }
-    public void removeCondition(String condition){
+    public void removeCondition(Condition condition){
         this.condition.remove(condition);
     }
     public String getName(){
@@ -180,33 +174,35 @@ public class Person implements MoveInterface {
     @Override
     public void run(Place place){
         try{
-            if(getLocation()==place&&(getX()>place.getMaxX() | getX()<place.getMinX() | getZ()>place.getMaxZ() | getZ()< place.getMinZ())){
-                throw new LouisStackInTextureException("Louis stacked in textures.");
+            if(getLocation()!=place){
+                System.err.println("Louis isn't in this place");
             }
-            if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ()){
+            else if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ()){
                 System.out.printf("%s onTheEdgeOfTheLocation", getName());
             }
             else{
-                while(getX() != place.getMaxX()){
-                    setX(getX()+getSpeed());
+                    while(getX() <= place.getMaxX()){
+                        setX(getX()+getSpeed());
+                        if(getLocation().equals(place)&&(getX()>place.getMaxX() | getX()<place.getMinX())){
+                            throw new LouisStackInTextureException("Louis stacked in textures.");
+                        }
+                    }
                 }
-            }
         }
         catch(LouisStackInTextureException exception){
-            System.out.printf("%n%s outside of %s", getName(), place.getPlace());
+            System.out.printf("%n%s can't run out of %s", getName(), place.getPlace());
+            setX(place.getMaxX());
         }
     }
     @Override
     public void climbTo(Place fromWhere, Place toWhere) {
         if(fromWhere.getPlace() == PlacesName.pit | toWhere.getPlace() == PlacesName.lawn){
             run(fromWhere);
-//            System.out.printf("%s began to climb.", getName());
             getPalms().getDirty(new Dust("brown"), new Bark());
             shirt.climbOut(trousers);
             setLocation(toWhere);
         }
         else if(fromWhere.getPlace() == PlacesName.lawn | toWhere.getPlace() == PlacesName.pit) {
-//            System.out.printf("%s began to go down.%n", getName());
             setLocation(toWhere);
         }
         else{
@@ -215,10 +211,10 @@ public class Person implements MoveInterface {
         }
     }
     public void think(){
-        if(getCondition().contains(Condition.scared.getCondition())){
+        if(getCondition().contains(Condition.scared)){
             conscience.addTrigger(getName() + ",please ignore this horror");
         }
-        if(getCondition().contains(Condition.nervous.getCondition())){
+        if(getCondition().contains(Condition.nervous)){
             conscience.addTrigger("I'm sleepwalker? What if it will repeat?");
         }
     }
@@ -234,7 +230,7 @@ public class Person implements MoveInterface {
     public void beWake(){
         setStatusSleeping(StatusSleeping.cantFallAsleep);
         condition.removeAll(getCondition());
-        addCondition(Condition.nervous.getCondition());
+        addCondition(Condition.nervous);
         think();
     }
     public void flipThrough(Magazines magazines){
@@ -251,17 +247,17 @@ public class Person implements MoveInterface {
     public void toHear(){
         if(getLocation().getNoiseLevel() == NoiseLevel.high){
             condition.removeAll(getCondition());
-            addCondition(Condition.hastily.getCondition());
-            addCondition(Condition.scared.getCondition());
+            addCondition(Condition.hastily);
+            addCondition(Condition.scared);
             setSpeed(3);
         }else if (getLocation().getNoiseLevel() == NoiseLevel.silence) {
             condition.removeAll(getCondition());
-            addCondition(Condition.depressed.getCondition());
+            addCondition(Condition.depressed);
             setSpeed(1);
         }
         else{
             condition.removeAll(getCondition());
-            addCondition(Condition.withoutIncident.getCondition());
+            addCondition(Condition.withoutIncident);
             setSpeed(2);
         }
     }

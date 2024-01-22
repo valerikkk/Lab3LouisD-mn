@@ -11,7 +11,7 @@ public class Crackling extends Phenomena{
     public void begin(Place place, Person person){
         if(place.getPlace() == PlacesName.pit | place.getPlace() == PlacesName.lawn){
             System.out.printf("%s's sounds... Cshse... Tschz...", getTitle());
-            if(person.getLocation() == place){
+            if(person.getLocation().equals(place)){
                 place.setNoiseLevel(NoiseLevel.high);
                 person.toHear();
             }else{

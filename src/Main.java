@@ -1,4 +1,5 @@
 
+import Exceptions.LouisStackInTextureException;
 import Humans.Person;
 import Phenomena.Crackling;
 import Phenomena.FallingAsleep;
@@ -50,8 +51,8 @@ public class Main {
         louis.flipThrough(magazines);
         rachel.standUp();
         rachel.say("Lou? Darling, are you coming?");
-        louis.say( "Now");
+        louis.say("Now");
         louis.turnLight(bedroom);
-        fallingAsleep.begin(house, louis);
+        louis.run(house);
     }
 }
