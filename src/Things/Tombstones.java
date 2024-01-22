@@ -1,13 +1,20 @@
 package Things;
 
+import Interface.Locatable;
 import Place.PlacesName;
 
-public class Tombstones extends Thing {
+public class Tombstones extends Thing implements Locatable{
+    private final String title;
     public Tombstones(String title){
-        super(title, PlacesName.lawn);
+        super(PlacesName.lawn);
+        this.title = title;
     }
     @Override
     public String toString() {
         return "Tombstone: " + getTitle();
+    }
+    @Override
+    public String getTitle(){
+        return title;
     }
 }

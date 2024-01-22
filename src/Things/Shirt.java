@@ -3,10 +3,10 @@ package Things;
 import Exceptions.ShirtStatusException;
 
 public class Shirt extends Clothe{
-    private ShirtStatus shirtStatus = ShirtStatus.refueled;
+    private ShirtStatus shirtStatus;
     public Shirt(int barCode){
         super(barCode);
-        title = ClothesName.shirt.getClotheTitle();
+        setShirtStatus(ShirtStatus.refueled);
     }
     public enum ShirtStatus{
             refueled, outwards, takedOff
@@ -19,13 +19,12 @@ public class Shirt extends Clothe{
         this.shirtStatus = shirtStatus;
     }
 
-    public void climbOut(Trousers trousers){
+    public void climbOut(){
         try{
             if(this.getShirtStatus() == ShirtStatus.outwards){
                 throw new ShirtStatusException("Shirt is already in trousers.");
             }
             setShirtStatus(ShirtStatus.outwards);
-            System.out.printf("%n%s climbed out from %s.", getTitle(), trousers.getTitle());
         }
         catch(ShirtStatusException exception){
             System.out.println("Shirt cannot climb out second time");

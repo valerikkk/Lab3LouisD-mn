@@ -6,7 +6,7 @@ import Place.PlacesName;
 
 import java.util.Objects;
 
-public abstract class Phenomena implements StartingInterface {
+public abstract class Phenomena{
     private final String title;
     private PlacesName placesName;
     public Phenomena(String title, PlacesName placesName){
@@ -18,12 +18,6 @@ public abstract class Phenomena implements StartingInterface {
     }
     public PlacesName getPlace(){
         return placesName;
-    }
-    @Override
-    public void begin(Place place){
-    }
-    @Override
-    public void begin(Place place, Person person){
     }
     @Override
     public int hashCode(){

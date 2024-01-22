@@ -4,19 +4,21 @@ import Place.PlacesName;
 import Things.Bark.*;
 
 
-public class Tree extends Thing{
+public class Tree extends Thing implements Locatable{
+    private final String title;
     public Tree(String title, PlacesName place){
-        super(title, place);
+        super(place);
+        this.title = title;
     }
     @Override
     public String toString(){
         return "Tree: "+ getTitle();
     }
-    public void showerBark(Bark bark){
-        bark.stateBark = StateBark.showered;
+    public void showerBark(){
+        Bark.stateBark = StateBark.showered;
     }
     @Override
     public String getTitle(){
-        return super.getTitle();
+        return title;
     }
 }

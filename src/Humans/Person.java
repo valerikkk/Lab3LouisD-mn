@@ -131,7 +131,6 @@ public class Person implements MoveInterface {
         }
         else if(callCounter == 2){
             if(place.getVisibilityCoefficient() <1){
-                conscience.addTrigger("Damn, what a Fog, is it Stonehendge?");
                 conscience.addTrigger("Omg, why i can't see nothing?");
                 conscience.addTrigger("Louis, are you sure, that it's all?");
             }
@@ -196,7 +195,7 @@ public class Person implements MoveInterface {
         if(fromWhere.getPlace() == PlacesName.pit | toWhere.getPlace() == PlacesName.lawn){
             run(fromWhere);
             getPalms().getDirty(new Dust("brown"), new Bark());
-            shirt.climbOut(trousers);
+            shirt.climbOut();
             setLocation(toWhere);
         }
         else if(fromWhere.getPlace() == PlacesName.lawn | toWhere.getPlace() == PlacesName.pit) {
@@ -231,7 +230,12 @@ public class Person implements MoveInterface {
         think();
     }
     public void flipThrough(Magazines magazines){
-        magazines.setStatus(Magazines.Status.read);
+        if(magazines.getStatus().equals(Magazines.Status.unread)){
+            magazines.setStatus(Magazines.Status.read);
+        }
+        else{
+            System.out.printf("%nTry to turn over %s.%n", magazines.getTitle());
+        }
     }
     @Override
     public void standUp(){
