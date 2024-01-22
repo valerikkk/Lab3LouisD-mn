@@ -13,7 +13,7 @@ public class Tree extends Thing{
         return "Tree: "+ getTitle();
     }
     public void showerBark(Bark bark){
-                Bark.stateBark = StateBark.showered.stateBark;
+        bark.stateBark = StateBark.showered;
     }
     @Override
     public String getTitle(){

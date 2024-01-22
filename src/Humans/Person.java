@@ -54,15 +54,12 @@ public class Person implements MoveInterface {
     public class Palms{
         String statusPalms = "normal";
         public void getDirty(Dust dust, Bark bark){
-            if (bark.getStateBark().equals(Bark.StateBark.showered.stateBark)){
+            if (bark.getStateBark().equals(Bark.StateBark.showered)){
                 setStatusPalms(dust.getColor());
             }
             else{
                setStatusPalms("clean");
             }
-        }
-        public String getTitle(){
-            return "palms";
         }
         public String getStatusPalms(){
             return statusPalms;
