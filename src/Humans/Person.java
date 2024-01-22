@@ -2,6 +2,7 @@ package Humans;
 import Enums.NoiseLevel;
 import Exceptions.LouisStackInTextureException;
 import Interface.MoveInterface;
+import Interface.Wearable;
 import Place.Place;
 import Things.*;
 import Place.PlacesName;
@@ -19,7 +20,7 @@ public class Person implements MoveInterface {
     private int Speed;
     private final Conscience conscience;
     private final Palms palms;
-    private final Clothe[] clothes = new Clothe[2];
+    private final List<Wearable> clothes = new ArrayList<>();
     private final Trousers trousers;
     private final Shirt shirt;
     private static int callCounter = 0;
@@ -36,8 +37,8 @@ public class Person implements MoveInterface {
         palms = new Palms();
         shirt = new Shirt(228);
         trousers = new Trousers(333);
-        clothes[0] = shirt;
-        clothes[1] = trousers;
+        clothes.add(shirt);
+        clothes.add(trousers);
     }
     public class Conscience{
         private final List<Object> triggers = new ArrayList<>();
@@ -139,7 +140,7 @@ public class Person implements MoveInterface {
     public Conscience getConscience() {
         return conscience;
     }
-    public Clothe[] getClothes() {
+    public List<Wearable> getClothes() {
         return clothes;
     }
     public Palms getPalms() {
@@ -219,6 +220,7 @@ public class Person implements MoveInterface {
     }
     public void sleep(){
         shirt.setShirtStatus(Shirt.ShirtStatus.takedOff);
+        clothes.remove(shirt);
         setStatusSleeping(StatusSleeping.sleeping);
         conscience.getTriggers().removeAll(conscience.getTriggers());
         System.out.println("Zzz");
@@ -240,6 +242,7 @@ public class Person implements MoveInterface {
     @Override
     public void standUp(){
         setStatusSleeping(StatusSleeping.wakeUp);
+        clothes.add(shirt);
         conscience.addTrigger("I wake, i am alive");
     }
     public void say(String message){
