@@ -1,7 +1,6 @@
 package Humans;
 import Enums.NoiseLevel;
 import Exceptions.LouisStackInTextureException;
-import Exceptions.ShirtStatusException;
 import Interface.MoveInterface;
 import Place.Place;
 import Things.*;
@@ -179,7 +178,7 @@ public class Person implements MoveInterface {
             setZ(place.getZ());
     }
     @Override
-    public void go(Place place){
+    public void run(Place place){
         try{
             if(getLocation()==place&&(getX()>place.getMaxX() | getX()<place.getMinX() | getZ()>place.getMaxZ() | getZ()< place.getMinZ())){
                 throw new LouisStackInTextureException("Louis stacked in textures.");
@@ -200,7 +199,7 @@ public class Person implements MoveInterface {
     @Override
     public void climbTo(Place fromWhere, Place toWhere) {
         if(fromWhere.getPlace() == PlacesName.pit | toWhere.getPlace() == PlacesName.lawn){
-            go(fromWhere);
+            run(fromWhere);
 //            System.out.printf("%s began to climb.", getName());
             getPalms().getDirty(new Dust("brown"), new Bark());
             shirt.climbOut(trousers);
