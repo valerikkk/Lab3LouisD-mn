@@ -27,7 +27,7 @@ public class Main {
         Crackling crackling = new Crackling();
         FallingAsleep fallingAsleep = new FallingAsleep();
         Fog fog = new Fog();
-        Magazines magazines = new Magazines();
+        Magazines magazines = new Magazines("Medical journey");
 
         crackling.begin(lawn, louis);
         louis.lookAround(lawn, louis.getConscience());
@@ -38,7 +38,6 @@ public class Main {
         louis.goTo(pathToHouse);
         louis.lookAround(lawn, louis.getConscience());
         fog.begin(lawn, louis);
-        fog.create();
         pathToHouse.toLead(PlacesName.house);
         louis.lookAround(lawn, louis.getConscience());
         louis.goTo(house);

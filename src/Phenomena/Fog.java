@@ -1,6 +1,7 @@
 package Phenomena;
 
 import Humans.Person;
+import Interface.Locatable;
 import Interface.StartingInterface;
 import Place.PlacesName;
 
@@ -16,19 +17,20 @@ public class Fog extends Phenomena implements StartingInterface {
         if (getPlace() == PlacesName.lawn){
             place.setHumidityCoefficient(1);
             place.setVisibilityCoefficient(0.2);
-        }
-        create();
-    }
-    public void create(){
-        class Stonehendge extends Thing {
-            public Stonehendge() {
-                super("Stonehendge", PlacesName.lawn);
+            class Silhouette extends Thing implements Locatable {
+                private final String title;
+                public Silhouette(String title) {
+                    super(PlacesName.lawn);
+                    this.title = title;
+                }
+                @Override
+                public String getTitle(){
+                    return title;
+                }
             }
-            void interactWithPerson(Person person){
-                person.getConscience().addTrigger("Damn, what a Fog, is it Stonehendge?");
-            }
+            Silhouette copyStonehendge = new Silhouette("Copy of Stonehendge");
+            place.addContent(copyStonehendge);
         }
-        Stonehendge stonehendge = new Stonehendge();
     }
 }
 //import Humans.Person;

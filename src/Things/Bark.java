@@ -3,10 +3,10 @@ package Things;
 import Interface.Locatable;
 import Place.PlacesName;
 
-public class Bark extends Thing implements Locatable {
+public class Bark extends Thing{
     public static StateBark stateBark;
     public Bark(){
-        super("bark", PlacesName.pit);
+        super(PlacesName.pit);
         stateBark = StateBark.onTree;
     }
     public StateBark getStateBark(){
@@ -14,10 +14,5 @@ public class Bark extends Thing implements Locatable {
     }
     public enum StateBark{
         onTree, showered;
-    }
-    @Override
-    public String toString(){
-        return getTitle() +
-                " from tree.";
     }
 }

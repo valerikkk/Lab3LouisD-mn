@@ -2,10 +2,9 @@ package Things;
 
 import Place.PlacesName;
 
-public class Clothe extends Thing{
+public class Clothe{
     private final int barCode;
     public Clothe(int barCode){
-        super("ekvnek", PlacesName.lawn);
         this.barCode = barCode;
     }
     @Override
