@@ -1,5 +1,5 @@
 package Interface;
 
 public interface Wearable {
-    String getTitle();
+    int getBarCodeS();
 }

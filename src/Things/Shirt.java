@@ -32,7 +32,7 @@ public class Shirt extends Clothe implements Wearable {
         }
     }
     @Override
-    public String getTitle(){
-        return "shirt";
+    public int getBarCodeS(){
+        return getBarCode();
     }
 }

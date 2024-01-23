@@ -9,8 +9,8 @@ public class Trousers extends Clothe implements Wearable {
         trousersStatus = TrousersStatus.wearing;
     }
     @Override
-    public String getTitle(){
-        return "trousers";
+    public int getBarCodeS(){
+        return getBarCode();
     }
     public enum TrousersStatus{
         wearing, takedOff
