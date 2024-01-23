@@ -1,9 +1,7 @@
-package Phenomena;
-import Humans.Person;
-import Place.Place;
-import Place.PlacesName;
-
-import java.util.Objects;
+package phenomena;
+import humans.Person;
+import place.Place;
+import place.PlacesName;
 
 public abstract class Phenomena{
     private final PlacesName placesName;

@@ -1,8 +1,8 @@
-package Phenomena;
-import Enums.NoiseLevel;
-import Humans.Person;
-import Place.PlacesName;
-import Place.Place;
+package phenomena;
+import enums.NoiseLevel;
+import humans.Person;
+import place.PlacesName;
+import place.Place;
 
 public class Crackling extends Phenomena{
     public Crackling(){

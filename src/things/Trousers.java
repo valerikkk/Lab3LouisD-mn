@@ -1,4 +1,4 @@
-package Things;
+package things;
 
 import Interface.Wearable;
 
@@ -9,7 +9,7 @@ public class Trousers extends Clothe implements Wearable {
         trousersStatus = TrousersStatus.wearing;
     }
     @Override
-    public int getBarCodeS(){
+    public int getBarCodes(){
         return getBarCode();
     }
     public enum TrousersStatus{

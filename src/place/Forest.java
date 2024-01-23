@@ -1,9 +1,8 @@
-package Place;
-import Enums.NoiseLevel;
-import Things.Bark;
-import Things.Dust;
-import Things.Tombstones;
-import Things.Tree;
+package place;
+import enums.NoiseLevel;
+import things.Dust;
+import things.Tombstones;
+import things.Tree;
 
 public class Forest extends Place{
     public Forest() {
@@ -16,9 +15,9 @@ public class Forest extends Place{
     public static class Pit extends Place{
         public Pit(){
             super(PlacesName.pit, 3, -12, 3, 6);
-            if(Bark.stateBark.equals(Bark.StateBark.showered)){
+            if(Tree.Bark.stateBark.equals(Tree.Bark.StateBark.showered)){
                 addContent(new Tree("brushwood", PlacesName.pit));
-               addContent(new Bark());
+               addContent(new Tree.Bark());
                addContent(new Dust("brown"));
             }
         }

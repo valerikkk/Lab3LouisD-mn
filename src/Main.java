@@ -1,18 +1,18 @@
-import Humans.Person;
-import Phenomena.Crackling;
-import Phenomena.Fog;
-import Phenomena.Phenomena;
-import Place.Forest;
-import Place.House;
-import Place.Place;
-import Place.PlacesName;
-import Things.*;
+import humans.Person;
+import phenomena.Crackling;
+import phenomena.Fog;
+import phenomena.Phenomena;
+import place.Forest;
+import place.House;
+import place.Place;
+import place.PlacesName;
+import things.*;
 
 public class Main {
     public static void main(String[] args) {
         Forest forest = new Forest();
         Forest.Lawn lawn = forest.new Lawn();
-        Tree tree = new Tree("beryozzzza", PlacesName.forest);
+        Tree tree = new Tree("brushwood", PlacesName.lawn);
         tree.showerBark();
         Forest.Pit pit = new Forest.Pit();
         Forest.Pathway pathToThicket = new Forest.Pathway(forest.getX(), forest.getY(), forest.getZ(), forest.getMaxX()-40);
@@ -33,6 +33,7 @@ public class Main {
         louis.climbTo(louis.getLocation(), lawn);
         louis.goTo(pathToHouse);
         louis.lookAround(lawn, louis.getConscience());
+        System.out.println(louis.getConscience().getTriggers());
         fog.begin(lawn, louis);
         pathToHouse.toLead(PlacesName.house);
         louis.lookAround(lawn, louis.getConscience());
@@ -49,12 +50,13 @@ public class Main {
             @Override
             public void begin(Place place, Person person) {
                 int time = 0;
+                System.out.printf("%n%s lied", person.getName());
                 while(time<8){
                     time++;
                     System.out.printf("%n%s minutes past",time);
                 }
-                System.out.printf("%n%s felt asleep", person.getName());
-                person.setStatusSleeping(Person.StatusSleeping.sleeping);
+                System.out.printf("%n%s felt asleep%n", person.getName());
+                person.sleep();
             }
         };
         fallingAsleep.begin(house, louis);

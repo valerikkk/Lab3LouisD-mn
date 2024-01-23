@@ -1,5 +1,5 @@
-package Things;
-public class Clothe{
+package things;
+public abstract class Clothe{
     private final int barCode;
     public Clothe(int barCode){
         this.barCode = barCode;
@@ -7,7 +7,6 @@ public class Clothe{
     public int getBarCode() {
         return barCode;
     }
-
     @Override
     public int hashCode(){
         return this.barCode;

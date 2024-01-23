@@ -1,13 +1,13 @@
-package Humans;
-import Enums.NoiseLevel;
-import Exceptions.LouisStackInTextureException;
-import Exceptions.PersonIsAlreadyInPlace;
+package humans;
+import enums.NoiseLevel;
+import exceptions.LouisStackInTextureException;
+import exceptions.PersonIsAlreadyInPlace;
 import Interface.MoveInterface;
 import Interface.Wearable;
-import Place.Place;
-import Things.*;
-import Place.PlacesName;
-import Things.Magazines;
+import place.Place;
+import things.*;
+import place.PlacesName;
+import things.Magazines;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -55,8 +55,8 @@ public class Person implements MoveInterface {
     }
     public class Palms{
         String statusPalms = "normal";
-        public void getDirty(Dust dust, Bark bark){
-            if (bark.getStateBark().equals(Bark.StateBark.showered)){
+        public void getDirty(Dust dust, Tree.Bark bark){
+            if (bark.getStateBark().equals(Tree.Bark.StateBark.showered)){
                 setStatusPalms(dust.getColor());
             }
             else{
@@ -151,9 +151,11 @@ public class Person implements MoveInterface {
     }
     public void addClothe(Wearable clothe){
         if(!getClothes().contains(clothe)){
-            clothes.add(clothe);
-            shirt.setShirtStatus(Shirt.ShirtStatus.refueled);
-            trousers.setTrousersStatus(Trousers.TrousersStatus.takedOff);
+            if(shirt.getBarCodes()== clothe.getBarCodes() | trousers.getBarCodes()==clothe.getBarCodes()){
+                clothes.add(clothe);
+                shirt.setShirtStatus(Shirt.ShirtStatus.refueled);
+                trousers.setTrousersStatus(Trousers.TrousersStatus.takedOff);
+            }
         }
     }
     public void removeClothe(Wearable clothe){
@@ -228,7 +230,7 @@ public class Person implements MoveInterface {
     public void climbTo(Place fromWhere, Place toWhere) {
         if(fromWhere.getPlace() == PlacesName.pit | toWhere.getPlace() == PlacesName.lawn &&getStatusSleeping()!=StatusSleeping.sleeping){
             run(fromWhere);
-            getPalms().getDirty(new Dust("brown"), new Bark());
+            getPalms().getDirty(new Dust("brown"), new Tree.Bark());
             shirt.climbOut();
             setLocation(toWhere);
         }

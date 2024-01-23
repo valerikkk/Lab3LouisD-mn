@@ -1,7 +1,7 @@
-package Things;
+package things;
 
 import Interface.Locatable;
-import Place.PlacesName;
+import place.PlacesName;
 
 public class Dust extends Thing implements Locatable{
     private final String color;

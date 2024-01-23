@@ -1,7 +1,7 @@
-package Things;
+package things;
 
 import Interface.Locatable;
-import Place.PlacesName;
+import place.PlacesName;
 
 public class Tombstones extends Thing implements Locatable{
     private final String title;

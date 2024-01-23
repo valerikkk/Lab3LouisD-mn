@@ -1,7 +1,9 @@
-package Things;
+package things;
 
-import Exceptions.ShirtStatusException;
+import exceptions.ShirtStatusException;
 import Interface.Wearable;
+
+import java.util.Objects;
 
 public class Shirt extends Clothe implements Wearable {
     private ShirtStatus shirtStatus;
@@ -32,7 +34,7 @@ public class Shirt extends Clothe implements Wearable {
         }
     }
     @Override
-    public int getBarCodeS(){
+    public int getBarCodes(){
         return getBarCode();
     }
 }

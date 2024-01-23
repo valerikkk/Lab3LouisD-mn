@@ -1,5 +1,5 @@
-package Things;
-import Place.PlacesName;
+package things;
+import place.PlacesName;
 public class Thing{
     private final PlacesName location;
     public Thing(PlacesName location){

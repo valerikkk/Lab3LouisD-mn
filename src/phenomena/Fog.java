@@ -1,10 +1,10 @@
-package Phenomena;
+package phenomena;
 
-import Humans.Person;
+import humans.Person;
 import Interface.Locatable;
-import Place.PlacesName;
-import Things.Thing;
-import Place.Place;
+import place.PlacesName;
+import things.Thing;
+import place.Place;
 public class Fog extends Phenomena{
     public Fog() {
         super(PlacesName.lawn);
