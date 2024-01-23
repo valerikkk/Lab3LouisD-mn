@@ -1,6 +1,7 @@
 package Humans;
 import Enums.NoiseLevel;
 import Exceptions.LouisStackInTextureException;
+import Exceptions.PersonIsAlreadyInPlace;
 import Interface.MoveInterface;
 import Interface.Wearable;
 import Place.Place;
@@ -182,7 +183,10 @@ public class Person implements MoveInterface {
 
     @Override
     public void goTo(Place place) {
-        if(getStatusSleeping()!=StatusSleeping.sleeping){
+        if(getLocation()==place){
+            throw new PersonIsAlreadyInPlace("Is already in this place");
+        }
+        else if(getStatusSleeping()!=StatusSleeping.sleeping){
             setLocation(place);
             setX(place.getX());
             setY(place.getY());
