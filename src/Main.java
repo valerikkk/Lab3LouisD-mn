@@ -1,9 +1,10 @@
 import Humans.Person;
 import Phenomena.Crackling;
-import Phenomena.FallingAsleep;
 import Phenomena.Fog;
+import Phenomena.Phenomena;
 import Place.Forest;
 import Place.House;
+import Place.Place;
 import Place.PlacesName;
 import Things.*;
 
@@ -21,7 +22,6 @@ public class Main {
         Person louis = new Person("Louis", lawn, pit.getMaxX(), lawn.getY(), pit.getMaxZ());
         Person rachel = new Person("Rachel", house, house.getX()+4, house.getY(), house.getZ()+3);
         Crackling crackling = new Crackling();
-        FallingAsleep fallingAsleep = new FallingAsleep();
         Fog fog = new Fog();
         Magazines magazines = new Magazines("Medical journey");
 
@@ -45,6 +45,17 @@ public class Main {
         rachel.say("Lou? Darling, are you coming?");
         louis.say("Now");
         louis.turnLight(bedroom);
-        fallingAsleep.begin(louis.getLocation(), louis);
+        Phenomena fallingAsleep = new Phenomena(PlacesName.house) {
+            @Override
+            public void begin(Place place, Person person) {
+                int time = 0;
+                while(time<8){
+                    time++;
+                    System.out.printf("%n%s minutes past",time);
+                }
+                System.out.printf("%n%s felt asleep", person.getName());
+            }
+        };
+        fallingAsleep.begin(house, louis);
     }
 }

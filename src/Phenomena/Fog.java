@@ -7,7 +7,7 @@ import Things.Thing;
 import Place.Place;
 public class Fog extends Phenomena{
     public Fog() {
-        super("Fog", PlacesName.lawn);
+        super(PlacesName.lawn);
     }
     public void begin(Place place, Person person) {
         if (getPlace() == PlacesName.lawn){
