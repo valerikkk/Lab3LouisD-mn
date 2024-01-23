@@ -13,7 +13,7 @@ public class Bark extends Thing implements Locatable{
         return stateBark;
     }
     public enum StateBark{
-        onTree, showered;
+        onTree, showered
     }
     @Override
     public String getTitle(){
