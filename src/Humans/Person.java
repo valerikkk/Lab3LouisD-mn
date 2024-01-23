@@ -182,7 +182,7 @@ public class Person implements MoveInterface {
     }
 
     @Override
-    public void goTo(Place place) {
+    public void goTo(Place place) throws PersonIsAlreadyInPlace {
         if(getLocation()==place){
             throw new PersonIsAlreadyInPlace("Is already in this place");
         }
