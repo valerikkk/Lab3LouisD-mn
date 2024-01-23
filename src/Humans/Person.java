@@ -116,25 +116,30 @@ public class Person implements MoveInterface {
         Speed = speed;
     }
     public void lookAround(Place place, Conscience conscience){
-        if(getCallCounter()== 0) {
-            if (getLocation() == place){
-                conscience.addTrigger("I see in lawn:");
-                conscience.addTrigger(place.getContent());
-                conscience.addTrigger("Pathway to the thicket...");
-                think();
+        if(getStatusSleeping()!=StatusSleeping.sleeping){
+            if(getCallCounter()== 0) {
+                if (getLocation() == place){
+                    conscience.addTrigger("I see in lawn:");
+                    conscience.addTrigger(place.getContent());
+                    conscience.addTrigger("Pathway to the thicket...");
+                    think();
+                    setCallCounter(getCallCounter()+1);
+                }
+            }else if (getCallCounter() == 1) {
+                conscience.addTrigger("Palms are: " + getPalms().getStatusPalms());
+                place.setNoiseLevel(NoiseLevel.silence);
+                toHear();
                 setCallCounter(getCallCounter()+1);
             }
-        }else if (getCallCounter() == 1) {
-            conscience.addTrigger("Palms are: " + getPalms().getStatusPalms());
-            place.setNoiseLevel(NoiseLevel.silence);
-            toHear();
-            setCallCounter(getCallCounter()+1);
-        }
-        else if(callCounter == 2){
-            if(place.getVisibilityCoefficient() <1){
-                conscience.addTrigger("Omg, why i can't see nothing?");
-                conscience.addTrigger("Louis, are you sure, that it's all?");
+            else if(callCounter == 2){
+                if(place.getVisibilityCoefficient() <1){
+                    conscience.addTrigger("Omg, why i can't see nothing?");
+                    conscience.addTrigger("Louis, are you sure, that it's all?");
+                }
             }
+        }
+        else{
+            System.err.printf("%n%s is sleeping Zzzz", getName());
         }
     }
     public Conscience getConscience() {
@@ -177,21 +182,27 @@ public class Person implements MoveInterface {
 
     @Override
     public void goTo(Place place) {
+        if(getStatusSleeping()!=StatusSleeping.sleeping){
             setLocation(place);
             setX(place.getX());
             setY(place.getY());
             setZ(place.getZ());
+        }
+        else{
+            System.err.printf("%n%s is sleeping", getName());
+        }
     }
     @Override
     public void run(Place place){
         try{
-            if(getLocation()!=place){
-                System.err.println("Louis isn't in this place");
-            }
-            else if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ()){
-                System.out.printf("%s onTheEdgeOfTheLocation", getName());
-            }
-            else{
+            if(getStatusSleeping()!=StatusSleeping.sleeping){
+                if(getLocation()!=place){
+                    System.err.println("Louis isn't in this place");
+                }
+                else if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ()){
+                    System.out.printf("%s onTheEdgeOfTheLocation", getName());
+                }
+                else{
                     while(getX() <= place.getMaxX()){
                         setX(getX()+getSpeed());
                         if(getLocation().equals(place)&&(getX()>place.getMaxX() | getX()<place.getMinX())){
@@ -199,15 +210,19 @@ public class Person implements MoveInterface {
                         }
                     }
                 }
+            }
+            else{
+                System.err.printf("%n maybe %s could get up...", getName());
+            }
         }
         catch(LouisStackInTextureException exception){
-            System.out.printf("%n%s can't run out of %s", getName(), place.getPlace());
+            System.out.printf("%n%s can't run out of limit %s", getName(), place.getPlace());
             setX(place.getMaxX());
         }
     }
     @Override
     public void climbTo(Place fromWhere, Place toWhere) {
-        if(fromWhere.getPlace() == PlacesName.pit | toWhere.getPlace() == PlacesName.lawn){
+        if(fromWhere.getPlace() == PlacesName.pit | toWhere.getPlace() == PlacesName.lawn &&getStatusSleeping()!=StatusSleeping.sleeping){
             run(fromWhere);
             getPalms().getDirty(new Dust("brown"), new Bark());
             shirt.climbOut();
@@ -217,16 +232,21 @@ public class Person implements MoveInterface {
             setLocation(toWhere);
         }
         else{
-            System.out.printf("%n%s can't climb here.", getName());
+            System.out.printf("%n%s can't climb now.", getName());
             System.exit(404);
         }
     }
     public void think(){
-        if(getCondition().contains(Condition.scared)){
-            conscience.addTrigger(getName() + ",please ignore this horror");
+        if(getStatusSleeping()!=StatusSleeping.sleeping){
+            if(getCondition().contains(Condition.scared)){
+                conscience.addTrigger(getName() + ",please ignore this horror");
+            }
+            if(getCondition().contains(Condition.nervous)){
+                conscience.addTrigger("I'm sleepwalker? What if it will repeat?");
+            }
         }
-        if(getCondition().contains(Condition.nervous)){
-            conscience.addTrigger("I'm sleepwalker? What if it will repeat?");
+        else{
+            System.err.printf("%n%s can't think while sleeping", getName());
         }
     }
     public enum StatusSleeping{
@@ -248,37 +268,50 @@ public class Person implements MoveInterface {
         think();
     }
     public void flipThrough(Magazines magazines){
-        if(magazines.getStatus().equals(Magazines.Status.unread)){
+        if(magazines.getStatus().equals(Magazines.Status.unread) && getStatusSleeping()!=StatusSleeping.sleeping){
             magazines.setStatus(Magazines.Status.read);
         }
         else{
-            System.out.printf("%nTry to turn over %s.%n", magazines.getTitle());
+            System.out.printf("%nTry to turn over %s or to wake up.%n", magazines.getTitle());
         }
     }
-    public void standUp(){
-        setStatusSleeping(StatusSleeping.wakeUp);
-        addClothe(shirt);
-        addClothe(trousers);
-        conscience.addTrigger("I wake, i am alive");
+    public void getUp(){
+        if(getStatusSleeping()==StatusSleeping.sleeping){
+            setStatusSleeping(StatusSleeping.wakeUp);
+            addClothe(shirt);
+            addClothe(trousers);
+            conscience.addTrigger("I wake, i am alive");
+        }else{
+            System.err.printf("%n%s is already wake up", getName());
+        }
     }
     public void say(String message){
-        System.out.printf("%n-%s",message);
-    }
-    public void toHear(){
-        if(getLocation().getNoiseLevel() == NoiseLevel.high){
-            removeCondition(Condition.depressed);
-            addCondition(Condition.hastily);
-            addCondition(Condition.scared);
-            setSpeed(3);
-        }else if (getLocation().getNoiseLevel() == NoiseLevel.silence) {
-            removeCondition(Condition.hastily);
-            addCondition(Condition.depressed);
-            setSpeed(1);
+        if(getStatusSleeping()!=StatusSleeping.sleeping){
+            System.out.printf("%n-%s",message);
         }
         else{
-            condition.removeAll(getCondition());
-            addCondition(Condition.withoutIncident);
-            setSpeed(2);
+            System.err.printf("%n%s is sleeping", getName());
+        }
+    }
+    public void toHear(){
+        if(getStatusSleeping()!=StatusSleeping.sleeping){
+            if(getLocation().getNoiseLevel() == NoiseLevel.high){
+                removeCondition(Condition.depressed);
+                addCondition(Condition.hastily);
+                addCondition(Condition.scared);
+                setSpeed(3);
+            }else if (getLocation().getNoiseLevel() == NoiseLevel.silence) {
+                removeCondition(Condition.hastily);
+                addCondition(Condition.depressed);
+                setSpeed(1);
+            }
+            else{
+                condition.removeAll(getCondition());
+                addCondition(Condition.withoutIncident);
+                setSpeed(2);
+            }
+        }else{
+            System.err.printf("%n%s is sleeping", getName());
         }
     }
     @Override
@@ -286,11 +319,11 @@ public class Person implements MoveInterface {
         return Objects.hash(name);
     }
     public void turnLight(Place place){
-        if(place.getPlace() == PlacesName.bedroom){
+        if(place.getPlace() == PlacesName.bedroom && place.getLightCoefficient()==1){
             place.setLightCoefficient(0);
         }
         else{
-            System.out.printf("%s can't turn light here%n", getName());
+            System.out.printf("%s can't turn light%n", getName());
         }
     }
     @Override

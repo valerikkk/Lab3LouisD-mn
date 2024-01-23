@@ -41,7 +41,7 @@ public class Main {
         louis.beWake();
         rachel.sleep();
         louis.flipThrough(magazines);
-        rachel.standUp();
+        rachel.getUp();
         rachel.say("Lou? Darling, are you coming?");
         louis.say("Now");
         louis.turnLight(bedroom);
@@ -54,6 +54,7 @@ public class Main {
                     System.out.printf("%n%s minutes past",time);
                 }
                 System.out.printf("%n%s felt asleep", person.getName());
+                person.setStatusSleeping(Person.StatusSleeping.sleeping);
             }
         };
         fallingAsleep.begin(house, louis);
