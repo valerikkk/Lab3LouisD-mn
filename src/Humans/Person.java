@@ -151,9 +151,11 @@ public class Person implements MoveInterface {
         }
     }
     public void removeClothe(Wearable clothe){
-        clothes.remove(clothe);
-        trousers.setTrousersStatus(Trousers.TrousersStatus.takedOff);
-        shirt.setShirtStatus(Shirt.ShirtStatus.takedOff);
+        if(getClothes().contains(clothe)){
+            clothes.remove(clothe);
+            trousers.setTrousersStatus(Trousers.TrousersStatus.takedOff);
+            shirt.setShirtStatus(Shirt.ShirtStatus.takedOff);
+        }
     }
     public Palms getPalms() {
         return palms;
@@ -253,7 +255,6 @@ public class Person implements MoveInterface {
             System.out.printf("%nTry to turn over %s.%n", magazines.getTitle());
         }
     }
-    @Override
     public void standUp(){
         setStatusSleeping(StatusSleeping.wakeUp);
         addClothe(shirt);

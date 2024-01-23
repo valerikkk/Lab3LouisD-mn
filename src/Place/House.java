@@ -1,9 +1,12 @@
 package Place;
 
+import Enums.NoiseLevel;
+
 public class House extends Place{
     public House(){
         super(PlacesName.house, 100, 0, 100, 15);
-
+        setLightCoefficient(1);
+        setNoiseLevel(NoiseLevel.average);
     }
     public class Bedroom extends Place{
         public Bedroom(){

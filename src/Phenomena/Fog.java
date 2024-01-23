@@ -2,15 +2,13 @@ package Phenomena;
 
 import Humans.Person;
 import Interface.Locatable;
-import Interface.StartingInterface;
 import Place.PlacesName;
 import Things.Thing;
 import Place.Place;
-public class Fog extends Phenomena implements StartingInterface {
+public class Fog extends Phenomena{
     public Fog() {
         super("Fog", PlacesName.lawn);
     }
-    @Override
     public void begin(Place place, Person person) {
         if (getPlace() == PlacesName.lawn){
             place.setHumidityCoefficient(1);

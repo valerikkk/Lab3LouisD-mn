@@ -1,13 +1,12 @@
 package Phenomena;
 
 import Humans.Person;
-import Interface.StartingInterface;
 import Place.PlacesName;
 import Place.Place;
 
 import java.util.concurrent.TimeUnit;
 
-public class FallingAsleep extends Phenomena implements StartingInterface {
+public class FallingAsleep extends Phenomena{
     public FallingAsleep(){
         super("falling asleep", PlacesName.house);
     }
@@ -34,7 +33,6 @@ public class FallingAsleep extends Phenomena implements StartingInterface {
             throw new RuntimeException(exception);
         }
     }
-    @Override
     public void begin(Place place, Person person){
         waitInTime(person);
         person.setStatusSleeping(Person.StatusSleeping.sleeping);

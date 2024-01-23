@@ -1,4 +1,6 @@
 package Phenomena;
+import Humans.Person;
+import Place.Place;
 import Place.PlacesName;
 
 import java.util.Objects;
@@ -16,6 +18,7 @@ public abstract class Phenomena{
     public PlacesName getPlace(){
         return placesName;
     }
+    public abstract void begin(Place place, Person person);
     @Override
     public int hashCode(){
         return Objects.hash(title);

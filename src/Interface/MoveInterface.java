@@ -4,5 +4,4 @@ public interface MoveInterface {
     void goTo(Place place);
     void run(Place place);
     void climbTo(Place fromWhere, Place toWhere);
-    void standUp();
 }
