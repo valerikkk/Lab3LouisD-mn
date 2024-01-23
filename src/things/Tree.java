@@ -15,9 +15,6 @@ public class Tree extends Thing implements Locatable{
         public StateBark getStateBark(){
             return stateBark;
         }
-        public void setStateBark(StateBark stateBark){
-            Tree.Bark.stateBark = stateBark;
-        }
         public enum StateBark{
             onTree, showered
         }

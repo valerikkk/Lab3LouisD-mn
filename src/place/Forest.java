@@ -29,7 +29,7 @@ public class Forest extends Place{
         public void toLead(PlacesName place){
         }
     }
-    public class Lawn extends Place{
+    public static class Lawn extends Place{
         public Lawn (){
             super(PlacesName.lawn, 9, 0, 0, 30);
             for (int i=0; i<5;i++){

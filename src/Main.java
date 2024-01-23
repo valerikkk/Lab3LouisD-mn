@@ -11,7 +11,7 @@ import things.*;
 public class Main {
     public static void main(String[] args) {
         Forest forest = new Forest();
-        Forest.Lawn lawn = forest.new Lawn();
+        Forest.Lawn lawn = new Forest.Lawn();
         Tree tree = new Tree("brushwood", PlacesName.lawn);
         tree.showerBark();
         Forest.Pit pit = new Forest.Pit();

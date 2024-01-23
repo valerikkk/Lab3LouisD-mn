@@ -37,9 +37,6 @@ public abstract class Place {
     public void addContent(Locatable object){
         content.add(object);
     }
-    public void removeContent(Locatable object){
-        content.remove(object);
-    }
     public List<Locatable> getContent(){
         return content;
     }

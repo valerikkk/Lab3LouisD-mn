@@ -46,9 +46,6 @@ public class Person implements MoveInterface {
         public void addTrigger(Object trigger){
             triggers.add(trigger);
         }
-        public void removeTrigger(Object trigger){
-            triggers.remove(trigger);
-        }
         public List<Object> getTriggers(){
             return triggers;
         }
