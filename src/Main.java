@@ -20,7 +20,7 @@ public class Main {
         Forest.Pathway pathToHouse = new Forest.Pathway(forest.getX(), 0, forest.getZ(), house.getMaxX()- forest.getX());
         House.Bedroom bedroom = house.new Bedroom();
         Person louis = new Person("Louis", lawn, pit.getMaxX(), lawn.getY(), pit.getMaxZ());
-        Person rachel = new Person("Rachel", house, house.getX()+4, house.getY(), house.getZ()+3);
+        Person rachel = new Person("Rachel", bedroom, house.getX()+4, house.getY(), house.getZ()+3);
         Crackling crackling = new Crackling();
         Fog fog = new Fog();
         Magazines magazines = new Magazines("Medical journey");
@@ -43,9 +43,10 @@ public class Main {
         rachel.sleep();
         louis.flipThrough(magazines);
         rachel.getUp();
-        rachel.say("Lou? Darling, are you coming?");
-        louis.say("Now");
+        rachel.sayTo(louis,"Lou? Darling, are you coming?");
+        louis.sayTo(rachel,"Now");
         louis.turnLight(bedroom);
+        rachel.sleep();
         Phenomena fallingAsleep = new Phenomena(PlacesName.house) {
             @Override
             public void begin(Place place, Person person) {
