@@ -13,4 +13,3 @@ public abstract class Phenomena{
     }
     public abstract void begin(Place place, Person person);
 }
-

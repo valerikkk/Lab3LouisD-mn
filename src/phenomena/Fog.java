@@ -1,5 +1,6 @@
 package phenomena;
 
+import enums.NoiseLevel;
 import humans.Person;
 import interfaces.Locatable;
 import place.PlacesName;
@@ -15,6 +16,7 @@ public class Fog extends Phenomena{
                 place.setHumidityCoefficient(1);
             }
             place.setVisibilityCoefficient(0.2);
+            place.setNoiseLevel(NoiseLevel.silence);
             class Silhouette extends Thing implements Locatable {
                 private final String title;
                 public Silhouette(String title) {

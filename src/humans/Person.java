@@ -41,6 +41,7 @@ public class Person implements MoveInterface, CheckingAbilityAction {
         trousers = new Trousers(333);
         addClothe(shirt);
         addClothe(trousers);
+        addCondition(Condition.withoutIncident);
     }
     public class Conscience{
         private final List<Object> triggers = new ArrayList<>();
@@ -201,7 +202,7 @@ public class Person implements MoveInterface, CheckingAbilityAction {
                     System.out.printf("%s onTheEdgeOfTheLocation", getName());
                 }
                 else{
-                    while(getX() <= place.getMaxX()){
+                    while(getX()<place.getMaxX()){
                         setX(getX()+getSpeed());
                         if(getLocation().equals(place)&&(getX()>place.getMaxX() | getX()<place.getMinX())){
                             throw new LouisStackInTextureException(this.getName() + " stacked in textures.");
@@ -287,13 +288,18 @@ public class Person implements MoveInterface, CheckingAbilityAction {
     public void toHear(){
             checkAbilityAction(this);
             if(getLocation().getNoiseLevel() == NoiseLevel.high){
-                removeCondition(Condition.depressed);
-                addCondition(Condition.hastily);
-                addCondition(Condition.scared);
+                removeCondition(Condition.withoutIncident);
+                if(!getCondition().contains(Condition.hastily) && !getCondition().contains(Condition.scared)){
+                    addCondition(Condition.hastily);
+                    addCondition(Condition.scared);
+                }
                 setSpeed(3);
-            }else if (getLocation().getNoiseLevel() == NoiseLevel.silence) {
+            }else if (getLocation().getNoiseLevel() == NoiseLevel.silence){
                 removeCondition(Condition.hastily);
-                addCondition(Condition.depressed);
+                removeCondition(Condition.withoutIncident);
+                if(!getCondition().contains(Condition.depressed)){
+                    addCondition(Condition.depressed);
+                }
                 setSpeed(1);
             }
             else{

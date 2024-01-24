@@ -23,20 +23,18 @@ public class Main {
         Person rachel = new Person("Rachel", bedroom, house.getX()+4, house.getY(), house.getZ()+3);
         Crackling crackling = new Crackling();
         Fog fog = new Fog();
-        Magazines magazines = new Magazines("Medical journey");
-
+        Magazines magazines = new Magazines("''Medical journey''");
         crackling.begin(lawn, louis);
         louis.lookAround(lawn, louis.getConscience());
         pathToThicket.toLead(PlacesName.thicket);
         louis.climbTo(louis.getLocation(), pit);
         crackling.begin(pit, louis);
         louis.climbTo(louis.getLocation(), lawn);
-        louis.goTo(pathToHouse);
-        louis.lookAround(lawn, louis.getConscience());
-        System.out.println(louis.getConscience().getTriggers());
         fog.begin(lawn, louis);
+        louis.lookAround(lawn, louis.getConscience());
         pathToHouse.toLead(PlacesName.house);
         louis.lookAround(lawn, louis.getConscience());
+        louis.goTo(pathToHouse);
         louis.goTo(house);
         louis.goTo(bedroom);
         louis.beWake();

@@ -42,4 +42,3 @@ public class Forest extends Place{
         }
     }
 }
-
