@@ -259,7 +259,7 @@ public class Person implements MoveInterface, CheckingAbilityAction {
     }
     public void flipThrough(Magazines magazines){
         checkAbilityAction(this);
-        if(magazines.getStatus().equals(Magazines.Status.unread)){
+        if(magazines.getStatus().equals(Magazines.Status.unread) && getLocation().getPlace() == magazines.getLocation()){
             magazines.setStatus(Magazines.Status.read);
         }
         else{

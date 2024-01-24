@@ -7,7 +7,7 @@ public class Magazines extends Thing implements Locatable{
     private Status status;
     private final String title;
     public Magazines(String title){
-        super(PlacesName.house);
+        super(PlacesName.bedroom);
         this.title = title;
         status = Status.unread;
     }
