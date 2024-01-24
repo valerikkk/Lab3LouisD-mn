@@ -1,7 +1,7 @@
 package things;
 
 import exceptions.ShirtStatusException;
-import Interface.Wearable;
+import interfaces.Wearable;
 
 public class Shirt extends Clothe implements Wearable {
     private ShirtStatus shirtStatus;

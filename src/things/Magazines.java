@@ -1,6 +1,6 @@
 package things;
 
-import Interface.Locatable;
+import interfaces.Locatable;
 import place.PlacesName;
 
 public class Magazines extends Thing implements Locatable{

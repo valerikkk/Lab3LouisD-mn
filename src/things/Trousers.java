@@ -1,6 +1,6 @@
 package things;
 
-import Interface.Wearable;
+import interfaces.Wearable;
 
 public class Trousers extends Clothe implements Wearable {
     private TrousersStatus trousersStatus;

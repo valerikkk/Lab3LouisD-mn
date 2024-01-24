@@ -1,4 +1,4 @@
-package Interface;
+package interfaces;
 import exceptions.PersonIsAlreadyInPlace;
 import place.Place;
 public interface MoveInterface {

@@ -1,7 +1,7 @@
 package phenomena;
 
 import humans.Person;
-import Interface.Locatable;
+import interfaces.Locatable;
 import place.PlacesName;
 import things.Thing;
 import place.Place;

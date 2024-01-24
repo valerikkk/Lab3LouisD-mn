@@ -1,7 +1,7 @@
 package place;
 
 import enums.NoiseLevel;
-import Interface.Locatable;
+import interfaces.Locatable;
 
 import java.util.ArrayList;
 import java.util.List;

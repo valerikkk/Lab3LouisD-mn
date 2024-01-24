@@ -1,5 +1,5 @@
 package things;
-import Interface.Locatable;
+import interfaces.Locatable;
 import place.PlacesName;
 public class Tree extends Thing implements Locatable{
     private final String title;
