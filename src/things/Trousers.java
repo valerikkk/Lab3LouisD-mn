@@ -13,7 +13,7 @@ public class Trousers extends Clothe implements Wearable {
         return getBarCode();
     }
     public enum TrousersStatus{
-        wearing, takedOff
+        wearing, takenOff
     }
     public TrousersStatus getTrousersStatus() {
         return trousersStatus;

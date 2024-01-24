@@ -10,7 +10,7 @@ public class Shirt extends Clothe implements Wearable {
         setShirtStatus(ShirtStatus.refueled);
     }
     public enum ShirtStatus{
-            refueled, outwards, takedOff
+            refueled, outwards, takenOff
     }
     public ShirtStatus getShirtStatus() {
         return shirtStatus;

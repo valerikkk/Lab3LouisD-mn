@@ -27,6 +27,9 @@ public class Forest extends Place{
             super(PlacesName.pathway, x, y, z, radius);
         }
         public void toLead(PlacesName place){
+            if(place.hashCode() == this.hashCode()){
+                System.err.printf("%n%s can't lead to itself", getPlace());
+            }
         }
     }
     public static class Lawn extends Place{

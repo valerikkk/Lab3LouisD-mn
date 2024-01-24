@@ -11,7 +11,9 @@ public class Fog extends Phenomena{
     }
     public void begin(Place place, Person person) {
         if (getPlace() == PlacesName.lawn){
-            place.setHumidityCoefficient(1);
+            if(place.getHumidityCoefficient()<1){
+                place.setHumidityCoefficient(1);
+            }
             place.setVisibilityCoefficient(0.2);
             class Silhouette extends Thing implements Locatable {
                 private final String title;
@@ -24,8 +26,8 @@ public class Fog extends Phenomena{
                     return title;
                 }
             }
-            Silhouette copyStonehendge = new Silhouette("Copy of Stonehendge");
-            place.addContent(copyStonehendge);
+            Silhouette copyStonehenge = new Silhouette("Copy of Stonehenge");
+            place.addContent(copyStonehenge);
         }
     }
 }

@@ -145,18 +145,18 @@ public class Person implements MoveInterface, CheckingAbilityAction {
     }
     public void addClothe(Wearable clothe){
         if(!getClothes().contains(clothe)){
-            if(shirt.getBarCodes()== clothe.getBarCodes() | trousers.getBarCodes()==clothe.getBarCodes()){
+            if(shirt.getBarCodes()== clothe.getBarCodes() | trousers.getBarCodes()==clothe.getBarCodes() && trousers.getTrousersStatus() == Trousers.TrousersStatus.takenOff){
                 clothes.add(clothe);
                 shirt.setShirtStatus(Shirt.ShirtStatus.refueled);
-                trousers.setTrousersStatus(Trousers.TrousersStatus.takedOff);
+                trousers.setTrousersStatus(Trousers.TrousersStatus.wearing);
             }
         }
     }
     public void removeClothe(Wearable clothe){
         if(getClothes().contains(clothe)){
             clothes.remove(clothe);
-            trousers.setTrousersStatus(Trousers.TrousersStatus.takedOff);
-            shirt.setShirtStatus(Shirt.ShirtStatus.takedOff);
+            trousers.setTrousersStatus(Trousers.TrousersStatus.takenOff);
+            shirt.setShirtStatus(Shirt.ShirtStatus.takenOff);
         }
     }
     public Palms getPalms() {
@@ -197,7 +197,7 @@ public class Person implements MoveInterface, CheckingAbilityAction {
                 if(getLocation()!=place){
                     System.err.println(this.getName() + " isn't in this place");
                 }
-                else if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ()){
+                else if(getX() == place.getMaxX() | getX() == place.getMinX() | getZ() == place.getMaxZ() | getZ() == place.getMinZ() | getY()<-20){
                     System.out.printf("%s onTheEdgeOfTheLocation", getName());
                 }
                 else{
